@@ -69,6 +69,24 @@ computing IRLs for every point on the basic pattern only.
 module to have aspect ration close to 1.
 	* Short internal wire length.
 
+## Compute IRLs at Internal Nodes
+* Consider computing IRLs for all points on the
+ pattern for an internal node *u* that has a vertical
+ cut.
+* To compute IRL L_u(x, y)
+	* Let (r_1, r_2, ..., r_k) be the IRL of *u*'s left child *p*
+ with starting point (x, y)
+	* Combine r_i with a set of irreducible realizations of
+ *u*'s right child *q*, which have heights between h(r_i)
+ and h(i_i-1).
+	* Combine r_i with the irreducible realization of *q*
+ with height less than but closest to h(r_i).
+* Why do we combine r_i with realizations r' of *q*
+ with heights between h(r_i) and h(r_i-1)?
+	* Suppoer h(r') > h(r_i-1). The
+ combination of r_i01 and r' is at least as good
+ as that of r_i and r'.
+
 ---
 ---
 
