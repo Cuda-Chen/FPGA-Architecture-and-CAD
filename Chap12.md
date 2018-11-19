@@ -87,6 +87,43 @@ module to have aspect ration close to 1.
  combination of r_i01 and r' is at least as good
  as that of r_i and r'.
 
+## Time Complexity
+* The complexity of computing IRL for one (x,y)
+ for an internal node is ![Alt Text](chap12Pic/pg18.gif)
+	* *l* is the mininum of the width and height of the chip.
+* The complexity of evaluating a slicing tree is ![Alt Text](chap12Pic/pg18_1.gif)
+	* *p* is the number of points on the pattern.
+	* *m* is the number of modules.
+
+## Compaction
+* A rectangular realization may contain more resoucres than required by a module.
+* Some problems cannot be solved if we only
+ allow rectangular realizations.
+* Compact vertically.
+
+## Postprocessing after Compaction
+* Problems with compaction:
+	* Some modules are placed in undesirable shapes.
+	* Large amount of white space on top of the chip.
+* Observation: <br>
+A module can be placed freely between two lines.
+	* The lower contour line records the placements of modules
+ "below" this module.
+	* The upper contour line records the placements of modules
+ "above" this module.
+* Process all modules again in reverse order of
+ compaction with the top of the chip as the initial
+ upper contour line.
+
+## Conclusions
+* FPGA floorplanning algorithm targeted for
+ FPGAs with heterogeneous resources.
+* Use simulated annealing to search on slicing floorplans.
+* For each slicing floorplan, compute IRLs for all the internal
+ nodes efficiently on a basic pattern.
+* Use compaction and postprocessing to solve 
+ more problems and to optimize floorplans.
+
 ---
 ---
 
