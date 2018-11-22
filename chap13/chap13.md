@@ -90,3 +90,56 @@ terminal net routing.
 	(b) Traditional method: restart wavefront
 	(c) VPR method: maintain wavefront
  and expand around new wire
+
+## Timing-Driven VPR Router
+* Take delay into account
+* Use *Elmore delay* model
+* Initially, route all nets in mininum delay
+independently.
+* Subsequently, sue a weighted sum of *congestion*
+and *delay* as cost.
+* At the end of each routing iteration, *timeing
+analysis* is performed.
+* From timing analysis, the timing *criticality Crit_ij*
+of every connection *(i,j)* is computed as follows:
+![Alt Text](pg18.gif)
+* Cost of using resource *n* for routing net *i* to its
+sink *j*:
+![Alt Text](pg18_1.gif)
+
+## Timing-Driven Routing
+* Common techniques:
+	* Route timing *critical nets first* for sequential routing
+	* Routing tree *topology optimization* (e.g. shortest-path
+tree, bounded-delay minimum-cost Steiner tree)
+	* *Delay penalty* (e.g. VPR)
+	* *Static slack distribution* given the path delay
+constraints
+	* *Dynamic net weighting* (e.g. VPR)
+
+## Placement Evaluation
+* One often needs to evaluate a placement e.g. SA
+will generatemany placement solutions.
+* Interested to *estimate routability and/or
+performance* quickly.
+
+---
+---
+
+## Pros and Cons of SAT-based routing approach?
+Pros:
+* always find a feasible solution 
+if one exists, otherwise it confirms
+the problem is infeasible
+* we can take advantage of any
+advance in SAT-solvers
+Cons:
+* cannot optimize metrics linke wirelength, delay
+* can be slow
+Application:
+* use it in local complex region
+
+## Seguential vs. Concurrent routing
+* Sequential routing of the nets
+* Concurrent routing of all nets
+	* e.g. SAT-based routing
