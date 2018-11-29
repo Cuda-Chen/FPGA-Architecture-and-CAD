@@ -73,3 +73,20 @@ delays at POs
 * # tuples formed at node *u*
 	* ![Alt Text](pg13.gif), where *n_i* = # tuples in *i*-th fanin of *u*
 	* Grow exponentially!
+* Prune dominated tuples
+	* Tuple ![Alt Text](pg13_1.gif) dominates ![Alt Text](pg13_2.gif) if
+		* *t1* and *t2* have same polarityand both rise and fall delays
+of *t1* are less than or equal to those of *t2*, i.e.,
+![Alt Text](pg13_3.gif)
+
+## Phase 2: Polarity Selection
+* if timing graph is a tree, we can optimally backtrace the optimal polarities for all LUT
+outputs in reverse topological order.
+* Otherwise,output polarity selection to optimize
+two different paths may conflict, so we can only 
+select output polarities heuristically to reduce circuit delay.
+
+## Experimental Results
+* Apply polarity selection based timing
+optimization after place & route
+	* Delay reduced by 2.5% on average
