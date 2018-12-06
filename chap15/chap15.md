@@ -119,6 +119,28 @@ capacitance routing resources
 * Shut down unused clock signals to reduce power
 * Gropu logic with common clock into same LAB
 in power-driven placement
+
+## Glitch Power
+* *Glitches* at gate output are unwanted signal transistions
+due to unbalanced arrival times at gate inputs.
+* E.g. Input transition from 000 to 111
+* For FPGA, glitch power accounts for a significant 
+portion of dynamic power (>20%)
+
+## Don't Cares in Logic Circuit
+* A mapped LUT nay have *don't care* entries
+* Don't care entry: an input pattern can never occur
+or output cannot propagate to POs
+
+## Glitch Reduction by Don't Care Assignment
+* Glich reduction by proper logic value assignment for
+don't cares (use a simple majority vote heuristic)
+
+## Interconnect Power Consumption
+* Routing power is prime component of FPGA dynamic power
+* Large wire capacitance results in high power
+consumption.
+
 ---
 ---
 
