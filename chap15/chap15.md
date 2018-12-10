@@ -141,6 +141,93 @@ don't cares (use a simple majority vote heuristic)
 * Large wire capacitance results in high power
 consumption.
 
+## Unused Wires in FPGA
+* FPGAs typically have underutilized wires
+* Can we take advantage of unused wires?
+
+## Wire Capacitance
+* Wire capacitance consists of:
+	* Coupling capacitance (C~C~) -- between adjacent wries on same layer
+	* Plate capacitance (C~P~) -- between adjacent wires on 
+different layers
+* Due to aspect ratio of wires C~C is dominant
+
+## Wire Capacitance Optimization in ASICs
+* In ASICs, have freedom to optimize wire width and spacing
+	* Can optimize *w_i* and *s_i* to maximize timing, minimize power
+	* Optimize *w_i* and *s_i* subject to $\sigma w_i + \sigma s_i = W$
+* if net *j* is timing/power critical:
+	* Can increase *s_2* and *s_3* to reduce C_C
+	* Reduces capacitance on net *j*, improves speed and
+reduces power
+* Can also optimize w_1, w_2, w_3 for speed and power
+
+## In FPGAs?
+* FPGA wiring prefabricated, width and spacing fixed
+* Can't space wires used wires apart, unused wires in the way
+* Capacitance on wires in two routing options the same
+	* Despite the fact that nets *i, j, k* are now spaced further apart
+
+## Wire Cap. Optimization (1)
+* What's the total impedance seen by Routing Conductor 1, looking towards Routing
+Conductor 2?
+
+## Wire Cap. Optimization (2)
+* If R_eq is small, capacitor C_C2 + C_P is shorted out
+* Impedance looking towards Routing Conductor 2
+is the capacitor C_C
+
+## Wire Cap. Optimization (3)
+* If R_eq is large, we approximate as an open circuit
+* Z_IN equal to series combination of C_C and C_C2 + C_P
+* Series combinations of capacitors result in reduced capacitance:
+	* If C_1 in series with C_2, eq. capacitance C_eq = C_1C_2/(C_1+C_2) < C_1
+* So, we can reduce capacitance if R_eq is large enough
+* Making R_eq large is bad...
+	* buffer delay ~ R_eqC_wire --> increase in R_eq increases delay
+* What if we made R_eq large only for unused conductors?
+	* Would not result in increased delay of used conductors
+	* Neighbouring used conductors would see beefit of reduced cap.
+* Need to be able to set R_eq large for unused conductors, but
+small for used conductors
+	* Use tri-state buffers!
+
+## Optimize Wire Cap. by TSB (tir-state buffer) and Routing
+* I fintermediate wires are tri-stated, see reduced C_C !!
+* In this work we tri-state unused wires to reduce wire cap.
+	* Proposed a novel, lightweight TSB topology
+	* Proposed CAD techniques to space wires out, reduce effective cap.
+
+## Traditional Tri-state Buffers
+* Header transistor M5 cuts off pull up path to output
+* Unused buffer would have IN at VDD
+	* M_1 pulls gate of M_6 to GND
+* Large area cost: M_2, M_4, and M_5 must be big due to stacking
+
+## Proposed Tri-state Buffer
+* dratiscally reduce area!
+
+## Proposed CAD Flow
+* Power and speed of a conductor can be optimized if adjacent
+conductor(s) unused
+* For capacitance reduction we need CAD which ensures
+conductors adjacent to power/timing critical nets are unused
+
+## Modifications to VPR Router
+* VPR router cost function for expanding net *i* to node *n*:
+	* ![Alt Text](pg44.gif)
+	* if *i* is timing critical focus on using fastest resources
+	* if *i* is not timing critical use uncongested resources
+* Tomaximize capacitance reduction:
+	* Want to route high activity nets with usused adj. conductors
+	* Want to avoid using routing conductors adj. to high activity nets
+
+## Results
+* Dynamic power reduction exceed 15% for C_C/C_P ~= 3
+* Get additional 14.6% leakage power saving from TSB
+* Critical path degradation ~1%
+* Total area overhead ~2.1%
+
 ---
 ---
 
